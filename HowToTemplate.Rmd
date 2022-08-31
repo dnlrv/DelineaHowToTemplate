@@ -1,0 +1,155 @@
+---
+title: |
+  |  Delinea Professional Services
+  |  How To Series
+  |  "Writing a document"
+author: |
+  |  YOURNAME
+  |  YOURTITLE, Professional Services
+date: "`r format(Sys.time(), '%d %B %Y')`"
+output:
+  pdf_document:
+    df_print: kable
+    number_sections: yes
+    toc: yes
+    toc_depth: 3
+    includes:
+      in_header: src/header.tex
+  html_document:
+    toc: yes
+    toc_depth: '3'
+    df_print: paged
+params:
+  customparameter: Value of parameter
+abstract: "\\begin{center}This document presents the instructions for Professional Services on the task of 'doing a thing'\\end{center}\\newpage\n"
+documentclass: article
+---
+
+\listoffigures <!-- generates list of figures used in the document -->
+\listoftables <!-- generates list of tables used in the document -->
+
+```{r settings, echo=FALSE, message=FALSE, warning=FALSE, results='asis'}
+# importing required libraries, don't change this
+library(dplyr)
+library(kableExtra)
+library(knitr)
+```
+
+\newpage <!-- forces a new page -->
+
+```{r VersionHistory, echo=FALSE, message=FALSE, warning=FALSE, results='asis'}
+# add to the version history here
+tabledata = "Version Number,Date,Author,Description
+1.0,08/02/2022,YOURNAME,Initial version
+"
+
+# read the above text as a csv file
+thistable <- read.csv(text = tabledata, header=TRUE, check.names=FALSE)
+
+# turn it into a kable table
+kbl(thistable, align = "c", caption = "Version History") %>% # name of table
+  kable_styling(latex_options = c("striped", "responsive")) %>%
+  column_spec(1, border_left = T) %>% # column 1 for border left line
+  column_spec(4, border_right = T) %>% # last column for border right line
+  row_spec(0, bold = T, background = "#241556", color = "white")
+```
+
+\newpage
+
+# Introduction {#introduction}
+
+Use RMarkdown to define sections with a `#` to start a new chapter.
+
+Additional `##` adds more subsections.
+
+# Code Blocks {#codeblocks}
+
+Code blocks can be used with a `~~~` like the following:
+
+````{verbatim}
+~~~{.lineAnchors .numberLines startFrom="350"}
+Code can go here
+
+The .lineAnchors option makes code carriage return if the text is too long on one line for .pdfs.
+
+The .numberLines option enables line numbers
+
+The startFrom="350" options makes line numbers start with 350
+~~~
+````
+
+The following is the example code block from above:
+
+~~~{.lineAnchors .numberLines startFrom="350"}
+Code can go here
+
+The .lineAnchors option makes code carriage return if the text is too long on one line for .pdfs.
+
+The .numberLines option enables line numbers.
+
+The startFrom="350" options makes line numbers start with 350.
+~~~
+
+# Graphics {#graphics}
+
+Graphics can be included via the following method. This was designed so that it works in both HTML and PDF outputs:
+
+````{verbatim}
+```{r echo=FALSE, fig.cap="Graphic Caption", out.width = '75%', fig.align='center', fig.pos = 'H'}
+knitr::include_graphics("src/dlogo.png")
+```
+````
+
+The following is the example code block from above:
+
+```{r echo=FALSE, fig.cap="Graphic Caption", out.width = '75%', fig.align='center', fig.pos = 'H'}
+knitr::include_graphics("src/dlogo.png")
+```
+
+# Tables {#tables}
+
+Tables are also done in a manner that produce output to both HTML and PDF outputs.
+
+Essentially, we set a String variable and write the data needed as if it were a .csv. Then we read that string as a .csv and create the table based on that data.
+
+the `kbl` function then creates the table with the relevant options with sub-functions like `kable_styling` and `column_spec` setting options like bold, borders, and colors.
+
+Check out (https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html) for all kinds of options.
+
+````{verbatim}
+```{r echo=FALSE, message=FALSE, warning=FALSE, results='asis'}
+# header row is first
+tabledata = "Version Number,Date,Author,Description
+1.0,08/02/2022,YOURNAME,Initial version
+"
+
+# read the above text as a csv file
+thistable <- read.csv(text = tabledata, header=TRUE, check.names=FALSE)
+
+# turn it into a kable table
+kbl(thistable, align = "c", caption = "Version History") %>% # name of table
+  kable_styling(latex_options = c("striped", "responsive")) %>%
+  column_spec(1, border_left = T) %>% # column 1 for border left line
+  column_spec(4, border_right = T) %>% # last column for border right line
+  row_spec(0, bold = T, background = "#241556", color = "white")
+```
+````
+
+The following is the example code block from above:\newline
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, results='asis'}
+# header row is first
+tabledata = "Version Number,Date,Author,Description
+1.0,08/02/2022,YOURNAME,Initial version
+"
+
+# read the above text as a csv file
+thistable <- read.csv(text = tabledata, header=TRUE, check.names=FALSE)
+
+# turn it into a kable table
+kbl(thistable, align = "c", caption = "Version History") %>% # name of table
+  kable_styling(latex_options = c("striped", "responsive")) %>%
+  column_spec(1, border_left = T) %>% # column 1 for border left line
+  column_spec(4, border_right = T) %>% # last column for border right line
+  row_spec(0, bold = T, background = "#241556", color = "white")
+```

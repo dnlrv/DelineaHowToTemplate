@@ -1,0 +1,29 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProcessOptions\relax % Process given options
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{float}
+\usepackage{wallpaper}
+\usepackage[utf8]{inputenc}
+\usepackage{bookmark}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{helvet}
+\usepackage{titling}
+\usepackage{url}
+\usepackage{fvextra}
+\usepackage[nottoc]{tocbibind}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,commandchars=\\\{\}}
+\renewcommand{\familydefault}{\sfdefault}
+\pagestyle{fancy}
+\fancyhead[RO,RE]{\rightmark}
+\fancyhead[LE,LO]{\leftmark}
+\fancyfoot[RE,RO]{\thepage}
+\fancyfoot[CE,CO]{}
+\fancyfoot[LE,LO]{\tiny{\copyright \, 2022-\the\year{} Delinea.\newline All Rights Reserved.}}
+\ThisULCornerWallPaper{1}{src/dheader.jpg}
+\LRCornerWallPaper{1}{src/dfooter.jpg}
+\pretitle{\begin{center} \includegraphics[width=4in]{src/Delinea.jpg}\LARGE\\}
+\posttitle{\end{center}}
